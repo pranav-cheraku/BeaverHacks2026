@@ -7,8 +7,24 @@ export const Spacing = {
 } as const;
 
 export const Radius = {
-  DEFAULT: 2,
-  SM: 4,
-  LG: 8,
-  PILL: 9999,
+  DEFAULT: 0,
+  SM: 0,
+  LG: 0,
+  PILL: 0,
+} as const;
+
+export const HardShadow = {
+  shadowColor: '#111111',
+  shadowOffset: { width: 4, height: 4 },
+  shadowOpacity: 1,
+  shadowRadius: 0,
+  elevation: 4,
+} as const;
+
+export const HardShadowSm = {
+  shadowColor: '#111111',
+  shadowOffset: { width: 2, height: 2 },
+  shadowOpacity: 1,
+  shadowRadius: 0,
+  elevation: 2,
 } as const;

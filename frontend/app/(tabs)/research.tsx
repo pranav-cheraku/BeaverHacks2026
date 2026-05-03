@@ -14,6 +14,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '../../src/theme/colors';
 import VeracityBadge from '../../src/components/VeracityBadge';
 import ProgressBar from '../../src/components/ProgressBar';
+import HalftoneDecoration from '../../src/components/HalftoneDecoration';
 import { api, Topic, PipelineStatus } from '../../src/services/api';
 
 const STAGE_LABELS: { key: keyof PipelineStatus; label: string }[] = [
@@ -57,7 +58,7 @@ function SpinnerIcon() {
   const spin = rotation.interpolate({ inputRange: [0, 1], outputRange: ['0deg', '360deg'] });
   return (
     <Animated.View style={{ transform: [{ rotate: spin }] }}>
-      <MaterialCommunityIcons name="loading" size={20} color={Colors.PRIMARY} />
+      <MaterialCommunityIcons name="loading" size={20} color={Colors.RISO} />
     </Animated.View>
   );
 }
@@ -83,7 +84,7 @@ function StatusStep({ label, state }: { label: string; state: 'done' | 'active' 
     <View style={styles.step}>
       {state === 'done' && (
         <View style={styles.stepDone}>
-          <MaterialCommunityIcons name="check" size={13} color="#fff" />
+          <MaterialCommunityIcons name="check" size={13} color={Colors.PAPER} />
         </View>
       )}
       {state === 'active' && <PulsingDot />}
@@ -110,7 +111,6 @@ export default function ResearchScreen() {
     }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
-  // Poll pipeline status every 5s while any stage is not complete
   useEffect(() => {
     if (!selectedTopic) return;
     const status = selectedTopic.pipeline_status;
@@ -135,14 +135,14 @@ export default function ResearchScreen() {
       <View style={styles.header}>
         <Text style={styles.wordmark}>GroundTruth</Text>
         <View style={styles.headerIcon}>
-          <MaterialCommunityIcons name="account-circle" size={28} color={Colors.OUTLINE} />
+          <MaterialCommunityIcons name="account-circle" size={28} color={Colors.INK_4} />
         </View>
       </View>
       <ProgressBar percent={progressPercent} />
 
       {loading ? (
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       ) : !selectedTopic ? (
         <View style={styles.loader}>
@@ -181,6 +181,9 @@ export default function ResearchScreen() {
             <Text style={styles.heroDesc}>
               Our synthesis engine is cross-referencing sources, mapping stakeholder positions, and building the evidence base for both sides of this debate.
             </Text>
+            <View style={{ position: 'absolute', right: 0, bottom: 0 }}>
+              <HalftoneDecoration color={Colors.RISO} opacity={0.2} />
+            </View>
           </View>
 
           {/* Status Feed */}
@@ -218,11 +221,11 @@ export default function ResearchScreen() {
                     ]}
                   >
                     {state === 'done' && (
-                      <MaterialCommunityIcons name="check-circle" size={18} color={Colors.PRIMARY} />
+                      <MaterialCommunityIcons name="check-circle" size={18} color={Colors.RISO} />
                     )}
                     {state === 'active' && <SpinnerIcon />}
                     {state === 'locked' && (
-                      <MaterialCommunityIcons name="lock" size={18} color={Colors.OUTLINE} />
+                      <MaterialCommunityIcons name="lock" size={18} color={Colors.INK_4} />
                     )}
                     <Text style={[styles.invNum, state === 'locked' && styles.invTextFaded]}>
                       Part {part.num}
@@ -242,90 +245,92 @@ export default function ResearchScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: Colors.SURFACE_CONTAINER_LOWEST },
+  safeArea: { flex: 1, backgroundColor: Colors.PAPER },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 56,
     paddingHorizontal: 16,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    backgroundColor: Colors.PAPER,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.INK,
   },
   wordmark: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.PRIMARY,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   headerIcon: { padding: 2 },
-  loader: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  loader: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.PAPER },
   emptyText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
   },
-  scroll: { flex: 1, backgroundColor: Colors.SURFACE },
+  scroll: { flex: 1, backgroundColor: Colors.PAPER_2 },
   scrollContent: { padding: 20, paddingBottom: 120, gap: 24 },
 
   pickerRow: { gap: 8, paddingBottom: 4 },
   pickerChip: {
     paddingHorizontal: 14,
     paddingVertical: 7,
-    borderRadius: 9999,
-    backgroundColor: Colors.SURFACE_CONTAINER,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderRadius: 0,
+    backgroundColor: Colors.PAPER_2,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     maxWidth: 200,
   },
   pickerChipActive: {
-    backgroundColor: Colors.PRIMARY,
-    borderColor: Colors.PRIMARY,
+    backgroundColor: Colors.RISO,
+    borderColor: Colors.INK,
   },
   pickerChipText: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 12,
-    color: Colors.ON_SURFACE,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
+    color: Colors.INK,
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
   },
-  pickerChipTextActive: { color: '#fff' },
+  pickerChipTextActive: { color: Colors.INK },
 
-  heroSection: { alignItems: 'center', gap: 12, paddingTop: 8, paddingBottom: 8 },
+  heroSection: { alignItems: 'center', gap: 12, paddingTop: 8, paddingBottom: 8, overflow: 'hidden' },
   heroTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 28,
     lineHeight: 34,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
     textAlign: 'center',
-    letterSpacing: -0.5,
+    letterSpacing: -0.7,
   },
   heroDesc: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 14,
     lineHeight: 22,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
     textAlign: 'center',
   },
 
   statusCard: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
     padding: 20,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 1,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
     gap: 16,
   },
   cardSectionTitle: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 12,
-    letterSpacing: 0.8,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 10,
+    letterSpacing: 1.6,
     textTransform: 'uppercase',
-    color: Colors.OUTLINE,
+    color: Colors.INK_3,
   },
   stepsList: { gap: 14 },
   step: { flexDirection: 'row', alignItems: 'center', gap: 12 },
@@ -333,7 +338,7 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     borderRadius: 11,
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.RISO,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -341,79 +346,83 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     borderRadius: 11,
-    backgroundColor: Colors.PRIMARY_FIXED,
+    backgroundColor: Colors.RISO_SOFT,
     borderWidth: 3,
-    borderColor: Colors.PRIMARY,
+    borderColor: Colors.RISO,
   },
   stepPending: {
     width: 22,
     height: 22,
     borderRadius: 11,
     borderWidth: 2,
-    borderColor: Colors.OUTLINE_VARIANT,
+    borderColor: Colors.PAPER_3,
     backgroundColor: 'transparent',
   },
   stepLabel: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 13,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
     flex: 1,
   },
-  stepLabelActive: { fontFamily: 'Inter_600SemiBold', color: Colors.PRIMARY },
-  stepLabelPending: { color: Colors.OUTLINE, opacity: 0.6 },
+  stepLabelActive: { fontFamily: 'SpaceGrotesk_700Bold', color: Colors.RISO },
+  stepLabelPending: { color: Colors.INK_4, opacity: 0.6 },
 
   gridHeader: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 14 },
   gridTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   liveBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
-    backgroundColor: 'rgba(13, 99, 27, 0.08)',
-    borderRadius: 9999,
+    backgroundColor: Colors.RISO_SOFT,
+    borderRadius: 0,
     paddingHorizontal: 8,
     paddingVertical: 3,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
   },
-  liveDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: Colors.PRIMARY },
+  liveDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: Colors.RISO },
   liveText: {
-    fontFamily: 'Inter_600SemiBold',
+    fontFamily: 'JetBrainsMono_700Bold',
     fontSize: 10,
-    color: Colors.PRIMARY,
-    letterSpacing: 0.5,
+    color: Colors.RISO,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
   },
 
   invGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   invCard: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     padding: 12,
     gap: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 3,
   },
-  invCardActive: { borderColor: Colors.PRIMARY, borderWidth: 1.5 },
-  invCardLocked: { backgroundColor: Colors.SURFACE_CONTAINER_LOW, opacity: 0.65 },
+  invCardActive: { borderColor: Colors.RISO, borderWidth: 2 },
+  invCardLocked: { backgroundColor: Colors.PAPER_2, opacity: 0.65 },
   invNum: {
-    fontFamily: 'Inter_500Medium',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 9,
-    letterSpacing: 1,
+    letterSpacing: 1.4,
     textTransform: 'uppercase',
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     marginTop: 2,
   },
   invTitle: {
-    fontFamily: 'Newsreader_500Medium',
+    fontFamily: 'SpaceGrotesk_500Medium',
     fontSize: 13,
     lineHeight: 17,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
   },
-  invTextFaded: { color: Colors.OUTLINE },
+  invTextFaded: { color: Colors.INK_4 },
 });

@@ -1,25 +1,45 @@
 import { Tabs } from 'expo-router';
+import { View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '../../src/theme/colors';
 
-const ACTIVE_COLOR = Colors.PRIMARY;
-const INACTIVE_COLOR = Colors.OUTLINE;
+function TabIcon({ name, focusedName, focused }: { name: any; focusedName: any; focused: boolean }) {
+  return (
+    <View style={{ alignItems: 'center', gap: 3 }}>
+      <View style={{
+        width: 6,
+        height: 6,
+        borderRadius: 3,
+        backgroundColor: focused ? Colors.RISO : 'transparent',
+      }} />
+      <MaterialCommunityIcons
+        name={focused ? focusedName : name}
+        size={22}
+        color={focused ? Colors.INK : Colors.INK_4}
+      />
+    </View>
+  );
+}
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: ACTIVE_COLOR,
-        tabBarInactiveTintColor: INACTIVE_COLOR,
+        tabBarActiveTintColor: Colors.INK,
+        tabBarInactiveTintColor: Colors.INK_4,
         tabBarStyle: {
-          backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-          borderTopColor: Colors.SURFACE_CONTAINER_HIGH,
+          backgroundColor: Colors.PAPER,
+          borderTopWidth: 1.5,
+          borderTopColor: Colors.INK,
+          height: 64,
+          paddingBottom: 8,
         },
         tabBarLabelStyle: {
-          fontFamily: 'Inter_500Medium',
-          fontSize: 11,
-          letterSpacing: 0.5,
+          fontFamily: 'JetBrainsMono_400Regular',
+          fontSize: 9.5,
+          textTransform: 'uppercase',
+          letterSpacing: 1.14,
         },
       }}
     >
@@ -27,12 +47,8 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: 'Feed',
-          tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
-              name={focused ? 'play-circle' : 'play-circle-outline'}
-              size={size}
-              color={color}
-            />
+          tabBarIcon: ({ focused }) => (
+            <TabIcon name="play-circle-outline" focusedName="play-circle" focused={focused} />
           ),
         }}
       />
@@ -40,12 +56,8 @@ export default function TabsLayout() {
         name="topics"
         options={{
           title: 'Topics',
-          tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
-              name={focused ? 'home-variant' : 'home-variant-outline'}
-              size={size}
-              color={color}
-            />
+          tabBarIcon: ({ focused }) => (
+            <TabIcon name="home-variant-outline" focusedName="home-variant" focused={focused} />
           ),
         }}
       />

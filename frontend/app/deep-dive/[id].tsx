@@ -81,13 +81,13 @@ export default function DeepDiveScreen() {
       <SafeAreaView style={styles.safeArea} edges={['top']}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.ON_SURFACE} />
+            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.INK} />
           </TouchableOpacity>
           <Text style={styles.wordmark}>GroundTruth</Text>
           <View style={{ width: 30 }} />
         </View>
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       </SafeAreaView>
     );
@@ -98,7 +98,7 @@ export default function DeepDiveScreen() {
       <SafeAreaView style={styles.safeArea} edges={['top']}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.ON_SURFACE} />
+            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.INK} />
           </TouchableOpacity>
           <Text style={styles.wordmark}>GroundTruth</Text>
           <View style={{ width: 30 }} />
@@ -114,7 +114,7 @@ export default function DeepDiveScreen() {
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.ON_SURFACE} />
+          <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.INK} />
         </TouchableOpacity>
         <Text style={styles.wordmark}>GroundTruth</Text>
         <View style={{ width: 30 }} />
@@ -137,7 +137,7 @@ export default function DeepDiveScreen() {
 
         {!pipelineComplete && (
           <View style={styles.pendingCard}>
-            <ActivityIndicator color={Colors.PRIMARY} size="small" />
+            <ActivityIndicator color={Colors.RISO} size="small" />
             <Text style={styles.pendingText}>
               Research pipeline is still running. Check back soon.
             </Text>
@@ -176,7 +176,7 @@ export default function DeepDiveScreen() {
           activeOpacity={0.85}
           onPress={() => router.push(`/topic/${id}`)}
         >
-          <MaterialCommunityIcons name="vote" size={18} color={Colors.ON_PRIMARY} />
+          <MaterialCommunityIcons name="vote" size={18} color={Colors.INK} />
           <Text style={styles.voteButtonText}>Go Vote</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -185,31 +185,31 @@ export default function DeepDiveScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: Colors.SURFACE_CONTAINER_LOWEST },
+  safeArea: { flex: 1, backgroundColor: Colors.PAPER },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 56,
     paddingHorizontal: 20,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    backgroundColor: Colors.PAPER,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.INK,
   },
   wordmark: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.PRIMARY,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   backBtn: { padding: 4 },
-  loader: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  loader: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.PAPER },
   errorText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
   },
-  scroll: { flex: 1, backgroundColor: Colors.SURFACE },
+  scroll: { flex: 1, backgroundColor: Colors.PAPER_2 },
   scrollContent: { padding: 20, paddingBottom: 48, gap: 20 },
 
   badgeRow: {
@@ -219,102 +219,104 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   processingTag: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 11,
-    color: Colors.OUTLINE,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
+    color: Colors.INK_4,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1.2,
   },
   topicTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 24,
     lineHeight: 30,
-    color: Colors.ON_SURFACE,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.6,
   },
 
   pendingCard: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOW,
-    borderRadius: 8,
+    backgroundColor: Colors.PAPER_2,
+    borderRadius: 0,
     padding: 16,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
   },
   pendingText: {
     flex: 1,
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 13,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     lineHeight: 18,
   },
 
   section: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
     padding: 20,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     gap: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 1,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   sectionLabel: {
-    fontFamily: 'Inter_600SemiBold',
+    fontFamily: 'JetBrainsMono_700Bold',
     fontSize: 10,
-    letterSpacing: 1.2,
+    letterSpacing: 1.6,
     textTransform: 'uppercase',
-    color: Colors.PRIMARY,
+    color: Colors.RISO,
   },
   sectionBody: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
     lineHeight: 24,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
   },
 
   debateCard: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
     padding: 20,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     gap: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 1,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   debateTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 18,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
+    letterSpacing: -0.45,
     marginBottom: 4,
   },
   sideLabel: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 11,
-    letterSpacing: 0.5,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 10,
+    letterSpacing: 1.4,
     textTransform: 'uppercase',
-    color: Colors.PRIMARY,
+    color: Colors.RISO,
     marginTop: 4,
   },
   bulletPoint: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 14,
     lineHeight: 22,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
     marginBottom: 2,
   },
   divider: {
-    height: 1,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOW,
+    height: 1.5,
+    backgroundColor: Colors.INK,
+    opacity: 0.15,
     marginVertical: 8,
   },
 
@@ -323,15 +325,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.RISO,
     paddingVertical: 14,
-    borderRadius: 24,
+    borderRadius: 0,
     marginTop: 4,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   voteButtonText: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 15,
-    color: Colors.ON_PRIMARY,
-    letterSpacing: 0.2,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 11,
+    color: Colors.INK,
+    letterSpacing: 1.54,
+    textTransform: 'uppercase',
   },
 });

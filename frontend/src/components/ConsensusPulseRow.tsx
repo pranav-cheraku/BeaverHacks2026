@@ -14,7 +14,7 @@ export default function ConsensusPulseRow({ label, percent, status }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <MaterialCommunityIcons name="pulse" size={14} color={Colors.PRIMARY} />
+        <MaterialCommunityIcons name="pulse" size={14} color={Colors.RISO} />
         <Text style={styles.pulseLabel}>{label}</Text>
         <View style={{ flex: 1 }} />
         <Text style={styles.status}>{status}</Text>
@@ -36,19 +36,23 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   pulseLabel: {
-    fontFamily: 'Inter_500Medium',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 11,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
   },
   status: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 11,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     marginRight: 4,
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
   },
   percent: {
-    fontFamily: 'Inter_600SemiBold',
+    fontFamily: 'JetBrainsMono_700Bold',
     fontSize: 12,
-    color: Colors.PRIMARY,
+    color: Colors.RISO,
   },
 });

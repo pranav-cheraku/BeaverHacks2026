@@ -99,7 +99,7 @@ function PartItem({ item, active, height, onDeepDive }: PartItemProps) {
           style={({ pressed }) => [styles.deepDiveBtn, pressed && { opacity: 0.85 }]}
           onPress={onDeepDive}
         >
-          <MaterialCommunityIcons name="flask-outline" size={18} color={Colors.ON_SURFACE} />
+          <MaterialCommunityIcons name="flask-outline" size={18} color={Colors.INK} />
           <Text style={styles.deepDiveText}>Deep Dive</Text>
         </Pressable>
       </View>
@@ -212,7 +212,7 @@ export default function SeriesScreen() {
 
       {loading && (
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       )}
 
@@ -250,7 +250,7 @@ export default function SeriesScreen() {
           style={[styles.completeOverlay, { opacity: completeOpacity }]}
           pointerEvents="none"
         >
-          <MaterialCommunityIcons name="check-circle" size={48} color={Colors.PRIMARY_FIXED} />
+          <MaterialCommunityIcons name="check-circle" size={48} color={Colors.RISO} />
           <Text style={styles.completeTitle}>Series Complete</Text>
           <Text style={styles.completeSubtitle}>You can now cast your vote.</Text>
         </Animated.View>
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   emptyText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 16,
     color: 'rgba(255,255,255,0.6)',
   },
@@ -292,26 +292,27 @@ const styles = StyleSheet.create({
   iconBtn: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(0,0,0,0.45)',
+    borderRadius: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.14)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.25)',
   },
   progressPill: {
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 9999,
-    backgroundColor: 'rgba(0,0,0,0.45)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.14)',
+    borderRadius: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.25)',
   },
   progressText: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 12,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 11,
     color: '#fff',
-    letterSpacing: 0.3,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
   },
 
   titleChip: {
@@ -319,26 +320,26 @@ const styles = StyleSheet.create({
     left: 16,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    borderRadius: 18,
-    backgroundColor: 'rgba(0,0,0,0.45)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.14)',
+    borderRadius: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.25)',
     gap: 6,
     overflow: 'hidden',
   },
   partLabel: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 11,
-    letterSpacing: 0.8,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 10,
+    letterSpacing: 1.6,
     textTransform: 'uppercase',
-    color: Colors.PRIMARY_FIXED,
+    color: Colors.RISO,
   },
   headline: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
     lineHeight: 26,
     color: '#fff',
-    letterSpacing: -0.3,
+    letterSpacing: -0.5,
   },
 
   ctaContainer: {
@@ -351,15 +352,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    paddingVertical: 10,
-    borderRadius: 24,
-    backgroundColor: Colors.PRIMARY_FIXED,
+    paddingVertical: 12,
+    borderRadius: 0,
+    backgroundColor: Colors.RISO,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 3,
   },
   deepDiveText: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 14,
-    color: Colors.ON_SURFACE,
-    letterSpacing: 0.2,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 11,
+    color: Colors.INK,
+    letterSpacing: 1.54,
+    textTransform: 'uppercase',
   },
 
   pauseIndicator: {
@@ -370,12 +379,12 @@ const styles = StyleSheet.create({
   pausePill: {
     width: 64,
     height: 64,
-    borderRadius: 32,
+    borderRadius: 0,
     backgroundColor: 'rgba(0,0,0,0.55)',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.18)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.3)',
   },
 
   completeOverlay: {
@@ -387,13 +396,13 @@ const styles = StyleSheet.create({
     zIndex: 20,
   },
   completeTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 28,
     color: '#fff',
-    letterSpacing: -0.3,
+    letterSpacing: -0.7,
   },
   completeSubtitle: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
     color: 'rgba(255,255,255,0.75)',
   },

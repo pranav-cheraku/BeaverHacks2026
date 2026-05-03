@@ -5,19 +5,18 @@ import { Colors } from '../theme/colors';
 
 interface Props {
   label: string;
-  dark?: boolean;
 }
 
-export default function VeracityBadge({ label, dark }: Props) {
+export default function VeracityBadge({ label }: Props) {
   return (
-    <View style={[styles.badge, dark && styles.badgeDark]}>
+    <View style={styles.badge}>
       <MaterialCommunityIcons
         name="check-decagram"
         size={14}
-        color={dark ? Colors.PRIMARY_FIXED : Colors.PRIMARY}
+        color={Colors.RISO}
         style={{ marginRight: 4 }}
       />
-      <Text style={[styles.label, dark && styles.labelDark]}>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
     </View>
   );
 }
@@ -26,27 +25,20 @@ const styles = StyleSheet.create({
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(13, 99, 27, 0.08)',
-    borderWidth: 1,
-    borderColor: 'rgba(13, 99, 27, 0.2)',
-    borderRadius: 9999,
+    backgroundColor: Colors.RISO_SOFT,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    borderRadius: 0,
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 4,
     alignSelf: 'flex-start',
   },
-  badgeDark: {
-    backgroundColor: 'rgba(163, 246, 156, 0.15)',
-    borderColor: 'rgba(163, 246, 156, 0.3)',
-  },
   label: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 11,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
     lineHeight: 14,
-    letterSpacing: 0.5,
+    letterSpacing: 1.6,
     textTransform: 'uppercase',
-    color: Colors.PRIMARY,
-  },
-  labelDark: {
-    color: Colors.PRIMARY_FIXED,
+    color: Colors.INK_2,
   },
 });

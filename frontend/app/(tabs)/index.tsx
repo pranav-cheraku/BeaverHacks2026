@@ -19,9 +19,6 @@ import { useRouter } from 'expo-router';
 import { api, Topic } from '../../src/services/api';
 import { Colors } from '../../src/theme/colors';
 
-const CTA_BG = Colors.PRIMARY_FIXED;
-const CTA_FG = Colors.ON_SURFACE;
-
 type Reel = {
   id: string;
   topic_id: string;
@@ -123,7 +120,7 @@ function ReelItem({ item, active, height }: ReelItemProps) {
           ]}
           onPress={() => router.push(`/topic/${item.topic_id}`)}
         >
-          <Ionicons name="play-circle" size={18} color={CTA_FG} />
+          <Ionicons name="play-circle" size={18} color={Colors.INK} />
           <Text style={styles.exploreText}>Explore Topic</Text>
         </Pressable>
       </View>
@@ -183,7 +180,7 @@ export default function ForYouScreen() {
       <StatusBar style="light" />
       {loading && (
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       )}
       {!loading && containerHeight > 0 && (
@@ -233,7 +230,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   emptyText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 16,
     color: 'rgba(255,255,255,0.6)',
   },
@@ -243,25 +240,25 @@ const styles = StyleSheet.create({
     left: 16,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    borderRadius: 18,
-    backgroundColor: 'rgba(0,0,0,0.45)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.14)',
+    borderRadius: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.25)',
     gap: 6,
     overflow: 'hidden',
   },
   topicTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
     lineHeight: 26,
     color: '#fff',
-    letterSpacing: -0.3,
+    letterSpacing: -0.5,
   },
   description: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
     lineHeight: 22,
-    color: 'rgba(255,255,255,0.7)',
+    color: 'rgba(255,255,255,0.75)',
   },
 
   ctaContainer: {
@@ -275,15 +272,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    paddingVertical: 10,
-    borderRadius: 24,
-    backgroundColor: CTA_BG,
+    paddingVertical: 12,
+    borderRadius: 0,
+    backgroundColor: Colors.RISO,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 3,
   },
   exploreText: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 14,
-    color: CTA_FG,
-    letterSpacing: 0.2,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 11,
+    color: Colors.INK,
+    letterSpacing: 1.54,
+    textTransform: 'uppercase',
   },
 
   pauseIndicator: {
@@ -294,11 +299,11 @@ const styles = StyleSheet.create({
   pausePill: {
     width: 64,
     height: 64,
-    borderRadius: 32,
+    borderRadius: 0,
     backgroundColor: 'rgba(0,0,0,0.55)',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.18)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.3)',
   },
 });

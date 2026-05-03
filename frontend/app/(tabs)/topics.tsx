@@ -15,6 +15,7 @@ import { Colors } from '../../src/theme/colors';
 import VeracityBadge from '../../src/components/VeracityBadge';
 import ProgressBar from '../../src/components/ProgressBar';
 import ConsensusPulseRow from '../../src/components/ConsensusPulseRow';
+import HalftoneDecoration from '../../src/components/HalftoneDecoration';
 import { api, Topic, VoteDistribution } from '../../src/services/api';
 
 function consensusStatus(mean: number | null): { percent: number; status: string } {
@@ -34,9 +35,9 @@ function TopicCard({ topic, onPress }: { topic: TopicWithVotes; onPress: () => v
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.85}>
       <View style={styles.cardImageContainer}>
-        <View style={[StyleSheet.absoluteFillObject, { backgroundColor: Colors.PRIMARY_CONTAINER }]} />
+        <View style={[StyleSheet.absoluteFillObject, { backgroundColor: Colors.PAPER_3 }]} />
         <LinearGradient
-          colors={['transparent', 'rgba(25,28,29,0.85)']}
+          colors={['transparent', 'rgba(17,17,17,0.88)']}
           style={StyleSheet.absoluteFillObject}
           pointerEvents="none"
         />
@@ -64,7 +65,6 @@ export default function TopicsScreen() {
 
   useEffect(() => {
     api.getTopics().then(async (data) => {
-      // Fetch vote distributions in parallel
       const withVotes = await Promise.all(
         data.map(async (t) => {
           try {
@@ -84,14 +84,14 @@ export default function TopicsScreen() {
       <View style={styles.header}>
         <Text style={styles.wordmark}>GroundTruth</Text>
         <TouchableOpacity style={styles.headerIcon}>
-          <MaterialCommunityIcons name="magnify" size={22} color={Colors.ON_SURFACE} />
+          <MaterialCommunityIcons name="magnify" size={22} color={Colors.INK} />
         </TouchableOpacity>
       </View>
       <ProgressBar percent={loading ? 0 : Math.min(topics.length * 10, 100)} />
 
       {loading ? (
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       ) : (
         <ScrollView
@@ -105,6 +105,9 @@ export default function TopicsScreen() {
             <Text style={styles.heroSubtitle}>
               Every topic is researched by AI, debated by AI, and voted on by you. Real consensus. Real stakes.
             </Text>
+            <View style={{ position: 'absolute', right: 24, bottom: 24 }}>
+              <HalftoneDecoration />
+            </View>
           </View>
 
           <View style={styles.topicsList}>
@@ -128,7 +131,7 @@ export default function TopicsScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
+    backgroundColor: Colors.PAPER,
   },
   header: {
     flexDirection: 'row',
@@ -136,25 +139,26 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 56,
     paddingHorizontal: 20,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    backgroundColor: Colors.PAPER,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.INK,
   },
   wordmark: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.PRIMARY,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   headerIcon: { padding: 4 },
   loader: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: Colors.PAPER,
   },
   scroll: {
     flex: 1,
-    backgroundColor: Colors.SURFACE,
+    backgroundColor: Colors.PAPER_2,
   },
   scrollContent: {
     paddingBottom: 120,
@@ -162,42 +166,43 @@ const styles = StyleSheet.create({
   hero: {
     paddingHorizontal: 24,
     paddingTop: 32,
-    paddingBottom: 32,
+    paddingBottom: 40,
     gap: 12,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    backgroundColor: Colors.PAPER,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.INK,
+    overflow: 'hidden',
   },
   heroTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 36,
     lineHeight: 42,
-    color: Colors.ON_SURFACE,
-    letterSpacing: -0.5,
+    color: Colors.INK,
+    letterSpacing: -0.9,
     marginTop: 4,
   },
   heroSubtitle: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
     lineHeight: 24,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
   },
   topicsList: {
     paddingHorizontal: 20,
     paddingTop: 24,
-    gap: 32,
+    gap: 24,
   },
   card: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   cardImageContainer: {
     height: 200,
@@ -211,13 +216,14 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   cardCategory: {
-    fontFamily: 'Inter_500Medium',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 10,
-    letterSpacing: 1.5,
+    letterSpacing: 1.6,
+    textTransform: 'uppercase',
     color: 'rgba(255,255,255,0.75)',
   },
   cardTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 22,
     lineHeight: 28,
     color: '#ffffff',
@@ -226,15 +232,15 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   cardSummary: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
     lineHeight: 24,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
   },
   emptyText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     textAlign: 'center',
     paddingVertical: 40,
   },

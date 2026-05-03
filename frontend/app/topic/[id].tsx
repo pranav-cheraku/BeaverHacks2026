@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -20,22 +20,13 @@ import { api, TopicDetail, VoteDistribution } from '../../src/services/api';
 
 const EMPTY_HISTOGRAM = Array(20).fill(0);
 
-const PART_LABELS = [
-  'Origin',
-  'Key Players',
-  'The Case For',
-  'The Case Against',
-  'Consequences',
-  'Where We Stand',
-];
-
 function ActionRow({ icon, label, onPress }: { icon: any; label: string; onPress: () => void }) {
   return (
     <TouchableOpacity style={styles.actionRow} activeOpacity={0.7} onPress={onPress}>
-      <MaterialCommunityIcons name={icon} size={18} color={Colors.PRIMARY} />
+      <MaterialCommunityIcons name={icon} size={18} color={Colors.RISO} />
       <Text style={styles.actionLabel}>{label}</Text>
       <View style={{ flex: 1 }} />
-      <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.OUTLINE} />
+      <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.INK_4} />
     </TouchableOpacity>
   );
 }
@@ -87,13 +78,13 @@ export default function TopicDetailScreen() {
       <SafeAreaView style={styles.safeArea} edges={['top']}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.ON_SURFACE} />
+            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.INK} />
           </TouchableOpacity>
           <Text style={styles.wordmark}>GroundTruth</Text>
           <View style={{ width: 30 }} />
         </View>
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       </SafeAreaView>
     );
@@ -104,7 +95,7 @@ export default function TopicDetailScreen() {
       <SafeAreaView style={styles.safeArea} edges={['top']}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.ON_SURFACE} />
+            <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.INK} />
           </TouchableOpacity>
           <Text style={styles.wordmark}>GroundTruth</Text>
           <View style={{ width: 30 }} />
@@ -119,14 +110,13 @@ export default function TopicDetailScreen() {
   const histogram = distribution?.histogram ?? EMPTY_HISTOGRAM;
   const total = distribution?.total ?? 0;
   const mean = distribution?.mean ?? null;
-
   const pipelineComplete = topic.pipeline_status?.video === 'complete';
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.ON_SURFACE} />
+          <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.INK} />
         </TouchableOpacity>
         <Text style={styles.wordmark}>GroundTruth</Text>
         <View style={{ width: 30 }} />
@@ -147,7 +137,7 @@ export default function TopicDetailScreen() {
 
         <Text style={styles.topicTitle}>{topic.topic}</Text>
 
-        {/* Bento: vote count + total */}
+        {/* Bento: vote count + your vote */}
         <View style={styles.bentoRow}>
           <View style={[styles.card, styles.cardPrimary]}>
             <Text style={styles.bigNumber}>{total.toLocaleString()}</Text>
@@ -182,11 +172,11 @@ export default function TopicDetailScreen() {
               </View>
               <View style={styles.legend}>
                 <View style={styles.legendItem}>
-                  <View style={[styles.legendDot, { backgroundColor: Colors.PRIMARY }]} />
+                  <View style={[styles.legendDot, { backgroundColor: Colors.RISO }]} />
                   <Text style={styles.legendLabel}>Your vote</Text>
                 </View>
                 <View style={styles.legendItem}>
-                  <View style={[styles.legendDot, { backgroundColor: Colors.SURFACE_CONTAINER_HIGHEST }]} />
+                  <View style={[styles.legendDot, { backgroundColor: Colors.PAPER_3 }]} />
                   <Text style={styles.legendLabel}>Global</Text>
                 </View>
               </View>
@@ -215,11 +205,11 @@ export default function TopicDetailScreen() {
               </View>
               <Text style={styles.poleLabel} numberOfLines={1}>{topic.pole_b}</Text>
             </View>
-            {voting && <ActivityIndicator color={Colors.PRIMARY} style={{ marginTop: 8 }} />}
+            {voting && <ActivityIndicator color={Colors.RISO} style={{ marginTop: 8 }} />}
           </View>
         ) : (
           <View style={[styles.card, styles.voteLockCard]}>
-            <MaterialCommunityIcons name="lock-outline" size={28} color={Colors.OUTLINE} />
+            <MaterialCommunityIcons name="lock-outline" size={28} color={Colors.INK_4} />
             <Text style={styles.voteLockTitle}>Voting Locked</Text>
             <Text style={styles.voteLockSubtitle}>
               Watch all 6 parts of the video series to unlock voting.
@@ -229,7 +219,7 @@ export default function TopicDetailScreen() {
               activeOpacity={0.85}
               onPress={() => router.push(`/series/${id}`)}
             >
-              <MaterialCommunityIcons name="play-circle-outline" size={16} color={Colors.ON_PRIMARY} />
+              <MaterialCommunityIcons name="play-circle-outline" size={16} color={Colors.INK} />
               <Text style={styles.watchSeriesText}>Watch Series</Text>
             </TouchableOpacity>
           </View>
@@ -279,31 +269,31 @@ export default function TopicDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: Colors.SURFACE_CONTAINER_LOWEST },
+  safeArea: { flex: 1, backgroundColor: Colors.PAPER },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 56,
     paddingHorizontal: 20,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    backgroundColor: Colors.PAPER,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.INK,
   },
   wordmark: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.PRIMARY,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   backBtn: { padding: 4 },
-  loader: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  loader: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.PAPER },
   errorText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
   },
-  scroll: { flex: 1, backgroundColor: Colors.SURFACE },
+  scroll: { flex: 1, backgroundColor: Colors.PAPER_2 },
   scrollContent: { padding: 20, paddingBottom: 120, gap: 20 },
 
   badgeRow: {
@@ -313,92 +303,95 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   category: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 11,
-    color: Colors.OUTLINE,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
+    color: Colors.INK_4,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1.2,
   },
   topicTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 24,
     lineHeight: 30,
-    color: Colors.ON_SURFACE,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.6,
   },
 
   bentoRow: { flexDirection: 'row', gap: 12 },
   card: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
     padding: 20,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 1,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   cardPrimary: { flex: 2 },
-  cardSecondary: { flex: 1, backgroundColor: Colors.SURFACE_CONTAINER_LOW },
+  cardSecondary: { flex: 1, backgroundColor: Colors.PAPER_2 },
   cardFull: { gap: 16 },
 
   bigNumber: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 40,
     lineHeight: 44,
-    color: Colors.PRIMARY,
+    color: Colors.RISO,
     letterSpacing: -1,
   },
   bigNumberLabel: {
-    fontFamily: 'Newsreader_500Medium',
-    fontSize: 16,
-    lineHeight: 22,
-    color: Colors.ON_SURFACE,
+    fontFamily: 'SpaceGrotesk_500Medium',
+    fontSize: 14,
+    lineHeight: 20,
+    color: Colors.INK,
     marginTop: 4,
   },
   bigNumberMeta: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
     lineHeight: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     marginTop: 8,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
   },
   totalLabel: {
-    fontFamily: 'Inter_500Medium',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 9,
-    letterSpacing: 1,
+    letterSpacing: 1.4,
     textTransform: 'uppercase',
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
   },
   totalNumber: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 28,
     lineHeight: 34,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
     letterSpacing: -0.5,
     marginTop: 4,
   },
   voteHint: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    color: Colors.OUTLINE,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
+    color: Colors.INK_4,
     marginTop: 8,
     lineHeight: 16,
   },
 
   spectrumHeader: { gap: 12 },
   sectionTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 18,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
+    letterSpacing: -0.45,
   },
   sectionSubtitle: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 11,
     lineHeight: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     marginTop: 2,
   },
   legend: { flexDirection: 'row', gap: 16 },
@@ -406,14 +399,16 @@ const styles = StyleSheet.create({
   legendDot: {
     width: 10,
     height: 10,
-    borderRadius: 9999,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderRadius: 0,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
   },
   legendLabel: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    color: Colors.OUTLINE,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
+    color: Colors.INK_4,
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
   },
 
   voteRow: {
@@ -423,27 +418,29 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   poleLabel: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 10,
-    color: Colors.ON_SURFACE,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 9,
+    color: Colors.INK,
     maxWidth: 60,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
   },
   voteSliderTrack: {
     flex: 1,
     flexDirection: 'row',
     height: 36,
-    borderRadius: 8,
+    borderRadius: 0,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     gap: 1,
   },
   voteSegment: {
     flex: 1,
-    backgroundColor: Colors.SURFACE_CONTAINER,
+    backgroundColor: Colors.PAPER_3,
   },
   voteSegmentSelected: {
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.RISO,
   },
 
   voteLockCard: {
@@ -452,16 +449,16 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
   voteLockTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.ON_SURFACE,
-    letterSpacing: -0.2,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   voteLockSubtitle: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 13,
     lineHeight: 19,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     textAlign: 'center',
     paddingHorizontal: 12,
   },
@@ -470,63 +467,81 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 6,
     marginTop: 6,
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.RISO,
     paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 24,
+    paddingVertical: 12,
+    borderRadius: 0,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 3,
   },
   watchSeriesText: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 13,
-    color: Colors.ON_PRIMARY,
-    letterSpacing: 0.2,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 11,
+    color: Colors.INK,
+    letterSpacing: 1.54,
+    textTransform: 'uppercase',
   },
 
   editorialCard: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOW,
-    borderRadius: 8,
+    backgroundColor: Colors.PAPER_2,
+    borderRadius: 0,
     padding: 20,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     gap: 10,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   editorialTag: {
-    fontFamily: 'Inter_600SemiBold',
+    fontFamily: 'JetBrainsMono_700Bold',
     fontSize: 10,
-    letterSpacing: 1.2,
+    letterSpacing: 1.6,
     textTransform: 'uppercase',
-    color: Colors.PRIMARY,
+    color: Colors.RISO,
   },
   editorialQuote: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
     lineHeight: 24,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
     fontStyle: 'italic',
   },
 
   sideLabel: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 11,
-    letterSpacing: 0.5,
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 10,
+    letterSpacing: 1.4,
     textTransform: 'uppercase',
-    color: Colors.PRIMARY,
+    color: Colors.RISO,
     marginBottom: 6,
   },
   bulletPoint: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 14,
     lineHeight: 22,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
     marginBottom: 4,
   },
 
   actionsCard: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     overflow: 'hidden',
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   actionRow: {
     flexDirection: 'row',
@@ -536,13 +551,14 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   actionLabel: {
-    fontFamily: 'Inter_500Medium',
+    fontFamily: 'SpaceGrotesk_500Medium',
     fontSize: 13,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
   },
   actionDivider: {
-    height: 1,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOW,
+    height: 1.5,
+    backgroundColor: Colors.INK,
+    opacity: 0.15,
     marginHorizontal: 20,
   },
 });

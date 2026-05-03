@@ -29,7 +29,7 @@ export default function SpectrumChart({ histogram, userPosition, poleA, poleB }:
                   styles.bar,
                   {
                     height: Math.max(barHeight, 2),
-                    backgroundColor: isUser ? Colors.PRIMARY : Colors.SURFACE_CONTAINER_HIGHEST,
+                    backgroundColor: isUser ? Colors.RISO : Colors.PAPER_3,
                   },
                 ]}
               />
@@ -61,14 +61,13 @@ const styles = StyleSheet.create({
   },
   bar: {
     width: '100%',
-    borderTopLeftRadius: 2,
-    borderTopRightRadius: 2,
+    borderRadius: 0,
   },
   youLabel: {
-    fontFamily: 'Inter_600SemiBold',
+    fontFamily: 'JetBrainsMono_700Bold',
     fontSize: 8,
-    color: Colors.PRIMARY,
-    letterSpacing: 0.5,
+    color: Colors.RISO,
+    letterSpacing: 1.2,
     marginBottom: 3,
   },
   xAxis: {
@@ -77,9 +76,9 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   xAxisLabel: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 10,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     maxWidth: '33%',
   },
 });

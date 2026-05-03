@@ -31,7 +31,7 @@ function SpinnerIcon() {
   const spin = rotation.interpolate({ inputRange: [0, 1], outputRange: ['0deg', '360deg'] });
   return (
     <Animated.View style={{ transform: [{ rotate: spin }] }}>
-      <MaterialCommunityIcons name="loading" size={18} color={Colors.PRIMARY} />
+      <MaterialCommunityIcons name="loading" size={18} color={Colors.RISO} />
     </Animated.View>
   );
 }
@@ -52,7 +52,7 @@ function ShimmerBar({ cardWidth }: { cardWidth: number }) {
       <View style={styles.shimmerFill}>
         <Animated.View style={[StyleSheet.absoluteFillObject, { transform: [{ translateX }] }]}>
           <LinearGradient
-            colors={['transparent', 'rgba(255,255,255,0.5)', 'transparent']}
+            colors={['transparent', 'rgba(255,74,20,0.25)', 'transparent']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={StyleSheet.absoluteFill}
@@ -99,14 +99,14 @@ export default function VideosScreen() {
       <View style={styles.header}>
         <Text style={styles.wordmark}>GroundTruth</Text>
         <View style={styles.headerIcon}>
-          <MaterialCommunityIcons name="account-circle" size={26} color={Colors.OUTLINE} />
+          <MaterialCommunityIcons name="account-circle" size={26} color={Colors.INK_4} />
         </View>
       </View>
       <ProgressBar percent={videoReady ? 100 : audioReady ? 80 : scriptsReady ? 50 : 20} />
 
       {loading ? (
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       ) : !topic ? (
         <View style={styles.loader}>
@@ -166,14 +166,14 @@ export default function VideosScreen() {
                   <View style={{ height: CARD_IMAGE_HEIGHT, position: 'relative', overflow: 'hidden' }}>
                     {state === 'ready' && (
                       <>
-                        <View style={[StyleSheet.absoluteFillObject, { backgroundColor: Colors.PRIMARY_CONTAINER }]} />
+                        <View style={[StyleSheet.absoluteFillObject, { backgroundColor: Colors.PAPER_3 }]} />
                         <View style={styles.playOverlay}>
                           <View style={styles.playCircle}>
-                            <MaterialCommunityIcons name="play" size={14} color="#fff" />
+                            <MaterialCommunityIcons name="play" size={14} color={Colors.INK} />
                           </View>
                         </View>
                         <View style={styles.checkBadge}>
-                          <MaterialCommunityIcons name="check-circle" size={16} color={Colors.PRIMARY} />
+                          <MaterialCommunityIcons name="check-circle" size={16} color={Colors.RISO} />
                         </View>
                       </>
                     )}
@@ -185,7 +185,7 @@ export default function VideosScreen() {
                     )}
                     {state === 'locked' && (
                       <View style={[styles.lockedBg, { height: CARD_IMAGE_HEIGHT }]}>
-                        <MaterialCommunityIcons name="lock" size={20} color={Colors.OUTLINE} />
+                        <MaterialCommunityIcons name="lock" size={20} color={Colors.INK_4} />
                       </View>
                     )}
                   </View>
@@ -207,7 +207,7 @@ export default function VideosScreen() {
           {!videoReady && (
             <View style={styles.ctaCard}>
               <View style={styles.bellCircle}>
-                <MaterialCommunityIcons name="bell" size={20} color={Colors.PRIMARY} />
+                <MaterialCommunityIcons name="bell" size={20} color={Colors.RISO} />
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.ctaTitle}>Stay updated</Text>
@@ -227,76 +227,82 @@ export default function VideosScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: Colors.SURFACE_CONTAINER_LOWEST },
+  safeArea: { flex: 1, backgroundColor: Colors.PAPER },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 56,
     paddingHorizontal: 16,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    backgroundColor: Colors.PAPER,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.INK,
   },
   wordmark: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.PRIMARY,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   headerIcon: { padding: 4 },
-  loader: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  loader: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.PAPER },
   emptyText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
   },
-  scroll: { flex: 1, backgroundColor: Colors.SURFACE },
+  scroll: { flex: 1, backgroundColor: Colors.PAPER_2 },
   scrollContent: { padding: 20, paddingBottom: 120, gap: 24 },
 
   pickerRow: { gap: 8, paddingBottom: 4 },
   pickerChip: {
     paddingHorizontal: 14,
     paddingVertical: 7,
-    borderRadius: 9999,
-    backgroundColor: Colors.SURFACE_CONTAINER,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    borderRadius: 0,
+    backgroundColor: Colors.PAPER_2,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     maxWidth: 200,
   },
-  pickerChipActive: { backgroundColor: Colors.PRIMARY, borderColor: Colors.PRIMARY },
-  pickerChipText: { fontFamily: 'Inter_500Medium', fontSize: 12, color: Colors.ON_SURFACE },
-  pickerChipTextActive: { color: '#fff' },
+  pickerChipActive: { backgroundColor: Colors.RISO, borderColor: Colors.INK },
+  pickerChipText: {
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
+    color: Colors.INK,
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
+  },
+  pickerChipTextActive: { color: Colors.INK },
 
   heroSection: { alignItems: 'center', gap: 10, paddingTop: 8 },
   heroTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 28,
     lineHeight: 34,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
     textAlign: 'center',
-    letterSpacing: -0.4,
+    letterSpacing: -0.7,
   },
   heroDesc: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 13,
     lineHeight: 20,
-    color: Colors.ON_SURFACE_VARIANT,
+    color: Colors.INK_3,
     textAlign: 'center',
   },
 
   videoGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   videoCard: {
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 3,
-    elevation: 1,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 3,
   },
   videoCardLocked: { opacity: 0.65 },
 
@@ -304,111 +310,132 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.25)',
+    backgroundColor: 'rgba(17,17,17,0.25)',
   },
   playCircle: {
     width: 32,
     height: 32,
-    borderRadius: 16,
+    borderRadius: 0,
     backgroundColor: 'rgba(255,255,255,0.9)',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
   },
   checkBadge: {
     position: 'absolute',
     top: 6,
     right: 6,
-    backgroundColor: '#fff',
-    borderRadius: 10,
+    backgroundColor: Colors.CARD,
   },
   generatingBg: {
-    backgroundColor: Colors.SURFACE_DIM,
+    backgroundColor: Colors.PAPER_3,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 4,
   },
   synthesizingText: {
-    fontFamily: 'Inter_500Medium',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 9,
-    color: Colors.PRIMARY,
-    letterSpacing: 0.3,
+    color: Colors.RISO,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
   },
   lockedBg: {
-    backgroundColor: Colors.SURFACE_DIM,
+    backgroundColor: Colors.PAPER_3,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   videoCardBody: { padding: 8, gap: 3 },
   videoPartNum: {
-    fontFamily: 'Inter_500Medium',
+    fontFamily: 'JetBrainsMono_400Regular',
     fontSize: 9,
-    letterSpacing: 0.8,
+    letterSpacing: 1.4,
     textTransform: 'uppercase',
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
   },
   videoTitle: {
-    fontFamily: 'Newsreader_500Medium',
+    fontFamily: 'SpaceGrotesk_500Medium',
     fontSize: 11,
     lineHeight: 15,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
   },
-  fadedText: { color: Colors.OUTLINE },
+  fadedText: { color: Colors.INK_4 },
 
   shimmerTrack: {
     flexDirection: 'row',
     height: 3,
-    borderRadius: 2,
+    borderRadius: 0,
     overflow: 'hidden',
-    backgroundColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.PAPER_3,
     marginTop: 4,
   },
   shimmerFill: {
     flex: 3,
-    backgroundColor: Colors.PRIMARY_CONTAINER,
+    backgroundColor: Colors.RISO_SOFT,
     overflow: 'hidden',
   },
   shimmerRemainder: {
     flex: 1,
-    backgroundColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.PAPER_3,
   },
 
   ctaCard: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 14,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.CARD,
+    borderRadius: 0,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
     padding: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 1,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 4,
   },
   bellCircle: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(13, 99, 27, 0.1)',
+    borderRadius: 0,
+    backgroundColor: Colors.RISO_SOFT,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
   },
-  ctaTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: Colors.ON_SURFACE },
+  ctaTitle: {
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 13,
+    color: Colors.INK,
+  },
   ctaDesc: {
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 11,
     lineHeight: 16,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     marginTop: 2,
   },
   notifyBtn: {
-    backgroundColor: Colors.PRIMARY,
-    borderRadius: 9999,
+    backgroundColor: Colors.RISO,
+    borderRadius: 0,
     paddingHorizontal: 14,
     paddingVertical: 8,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
+    shadowColor: Colors.INK,
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 2,
   },
-  notifyBtnLabel: { fontFamily: 'Inter_600SemiBold', fontSize: 12, color: '#fff' },
+  notifyBtnLabel: {
+    fontFamily: 'JetBrainsMono_700Bold',
+    fontSize: 10,
+    color: Colors.INK,
+    textTransform: 'uppercase',
+    letterSpacing: 1.4,
+  },
 });

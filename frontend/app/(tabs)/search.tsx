@@ -35,25 +35,25 @@ export default function SearchScreen() {
       </View>
 
       <View style={styles.searchBar}>
-        <MaterialCommunityIcons name="magnify" size={20} color={Colors.OUTLINE} style={{ marginRight: 8 }} />
+        <MaterialCommunityIcons name="magnify" size={20} color={Colors.INK_4} style={{ marginRight: 8 }} />
         <TextInput
           style={styles.input}
           placeholder="Search topics…"
-          placeholderTextColor={Colors.OUTLINE}
+          placeholderTextColor={Colors.INK_4}
           value={query}
           onChangeText={setQuery}
           autoCorrect={false}
         />
         {query.length > 0 && (
           <TouchableOpacity onPress={() => setQuery('')}>
-            <MaterialCommunityIcons name="close-circle" size={18} color={Colors.OUTLINE} />
+            <MaterialCommunityIcons name="close-circle" size={18} color={Colors.INK_4} />
           </TouchableOpacity>
         )}
       </View>
 
       {loading ? (
         <View style={styles.loader}>
-          <ActivityIndicator color={Colors.PRIMARY} size="large" />
+          <ActivityIndicator color={Colors.RISO} size="large" />
         </View>
       ) : (
         <ScrollView
@@ -80,7 +80,7 @@ export default function SearchScreen() {
                     {topic.pole_a} vs. {topic.pole_b}
                   </Text>
                 </View>
-                <MaterialCommunityIcons name="chevron-right" size={20} color={Colors.OUTLINE} />
+                <MaterialCommunityIcons name="chevron-right" size={20} color={Colors.INK_4} />
               </TouchableOpacity>
             ))
           )}
@@ -93,20 +93,21 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: Colors.SURFACE_CONTAINER_LOWEST,
+    backgroundColor: Colors.PAPER,
   },
   header: {
     height: 56,
     paddingHorizontal: 20,
     justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.INK,
+    backgroundColor: Colors.PAPER,
   },
   wordmark: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 20,
-    color: Colors.PRIMARY,
-    letterSpacing: -0.3,
+    color: Colors.INK,
+    letterSpacing: -0.5,
   },
   searchBar: {
     flexDirection: 'row',
@@ -114,28 +115,29 @@ const styles = StyleSheet.create({
     margin: 16,
     paddingHorizontal: 14,
     paddingVertical: 10,
-    backgroundColor: Colors.SURFACE_CONTAINER,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.PAPER_2,
+    borderRadius: 0,
+    borderWidth: 1.5,
+    borderColor: Colors.INK,
   },
   input: {
     flex: 1,
-    fontFamily: 'Inter_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
   },
   loader: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: Colors.PAPER,
   },
-  scroll: { flex: 1 },
+  scroll: { flex: 1, backgroundColor: Colors.PAPER },
   scrollContent: { paddingBottom: 120 },
   emptyText: {
-    fontFamily: 'Newsreader_400Regular',
+    fontFamily: 'SpaceGrotesk_400Regular',
     fontSize: 15,
-    color: Colors.OUTLINE,
+    color: Colors.INK_4,
     textAlign: 'center',
     paddingVertical: 40,
     paddingHorizontal: 24,
@@ -145,20 +147,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.SURFACE_CONTAINER_LOW,
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.PAPER_3,
   },
   topicRowContent: { flex: 1, marginRight: 8 },
   topicRowTitle: {
-    fontFamily: 'Newsreader_600SemiBold',
+    fontFamily: 'Fraunces_800ExtraBold',
     fontSize: 16,
     lineHeight: 22,
-    color: Colors.ON_SURFACE,
+    color: Colors.INK,
+    letterSpacing: -0.4,
   },
   topicRowSub: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 12,
-    color: Colors.OUTLINE,
+    fontFamily: 'JetBrainsMono_400Regular',
+    fontSize: 10,
+    color: Colors.INK_4,
     marginTop: 2,
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
   },
 });

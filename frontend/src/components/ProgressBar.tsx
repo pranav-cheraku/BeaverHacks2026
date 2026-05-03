@@ -18,12 +18,14 @@ export default function ProgressBar({ percent }: Props) {
 
 const styles = StyleSheet.create({
   track: {
-    height: 2,
+    height: 8,
     flexDirection: 'row',
-    backgroundColor: Colors.SURFACE_CONTAINER_HIGH,
+    backgroundColor: Colors.PAPER_3,
+    borderWidth: 1,
+    borderColor: Colors.INK,
   },
   fill: {
-    height: 2,
-    backgroundColor: Colors.PRIMARY,
+    height: '100%',
+    backgroundColor: Colors.INK,
   },
 });
